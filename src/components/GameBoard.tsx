@@ -179,26 +179,26 @@ const GameBoard: React.FC = () => {
             d3VelocityDecay={0.3}
             width={600}
             height={500}
-            nodeCanvasObject={(node, ctx, globalScale) => {
-              const label = (node as GraphNode).name;
+            nodeCanvasObject={(node: GraphNode, ctx: CanvasRenderingContext2D, globalScale: number) => {
+              const label = node.name;
               const fontSize = 12/globalScale;
               ctx.font = `${fontSize}px Sans-Serif`;
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
-              ctx.fillStyle = (node as GraphNode).color || '#666';
+              ctx.fillStyle = node.color || '#666';
               ctx.beginPath();
               ctx.arc(node.x || 0, node.y || 0, 10, 0, 2 * Math.PI);
               ctx.fill();
               ctx.fillStyle = 'white';
               ctx.fillText(label, node.x || 0, node.y || 0);
             }}
-            linkCanvasObject={(link, ctx, globalScale) => {
-              const label = (link as GraphLink).label;
+            linkCanvasObject={(link: GraphLink, ctx: CanvasRenderingContext2D, globalScale: number) => {
+              const label = link.label;
               const fontSize = 10/globalScale;
               ctx.font = `${fontSize}px Sans-Serif`;
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
-              ctx.fillStyle = (link as GraphLink).color || '#999';
+              ctx.fillStyle = link.color || '#999';
               
               const source = link.source as any;
               const target = link.target as any;
@@ -215,7 +215,7 @@ const GameBoard: React.FC = () => {
                 fontSize + padding*2
               );
               
-              ctx.fillStyle = (link as GraphLink).color || '#999';
+              ctx.fillStyle = link.color || '#999';
               ctx.fillText(label, midX, midY);
             }}
           />
